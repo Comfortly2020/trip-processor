@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trip-catalog-deployment
+  name: trip-processor-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trip-catalog
+      app: trip-processor
   template:
     metadata:
       labels:
-        app: trip-catalog
+        app: trip-processor
     spec:
       containers:
-        - image: davidunilj/comfortly-trip-data:2020-12-03-22-29-12
+        - image: davidunilj/comfortly-trip-processor:2020-12-03-22-29-12
           name: trip-catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
@@ -47,7 +47,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trip-catalog
+  name: trip-processor
 spec:
   type: LoadBalancer
   ports:
@@ -55,4 +55,4 @@ spec:
       protocol: TCP
       targetPort: server
   selector:
-    app: trip-catalog
+    app: trip-processor
