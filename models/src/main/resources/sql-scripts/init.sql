@@ -1,0 +1,2 @@
+INSERT INTO trip_data (user_id, startLocation_lat, startLocation_lng, end_location_lat, end_location_lng, start_time, end_time) VALUES ('user1', 45.894607, 14.059120, 45.803679, 14.087333, TIMESTAMP '2020-10-28 15:36:38', TIMESTAMP '2020-10-28 15:50:12');
+INSERT INTO location_data (trip_id, location_lat, location_lng, speed, acceleration, orientation, timestamp) VALUES (1, 45.894607, 14.059120, 45.13, 2.54, 87.63, TIMESTAMP '2020-10-28 15:50:12');

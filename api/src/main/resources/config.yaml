@@ -1,0 +1,46 @@
+kumuluzee:
+  name: trip-processor-service
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8080
+    http:
+      port: 8080
+  datasources:
+    - jndi-name: jdbc/TripDataDS
+      connection-url: jdbc:postgresql://0.0.0.0:5432/trip-data
+      username: dbuser
+      password: postgres
+      max-pool-size: 20
+    - jndi-name: jdbc/AnswerDataDS
+      connection-url: jdbc:postgresql://0.0.0.0:5432/answer-data
+      username: dbuser
+      password: postgres
+      max-pool-size: 20
+    - jndi-name: jdbc/AnalyzedTripDataDS
+      connection-url: jdbc:postgresql://0.0.0.0:5432/analyzed-trip-data
+      username: dbuser
+      password: postgres
+      max-pool-size: 20
+  config:
+    consul:
+      agent: http://localhost:8500
+  health:
+    checks:
+      - data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/TripDataDS
+      - data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/AnswerDataDS
+      - data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/AnalyzedTripDataDS
+  metrics:
+    web-instrumentation:
+      - name: processor-endpoint
+        url-pattern: /v1/process
+rest-properties:
+  config:
+    broken: false
