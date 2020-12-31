@@ -14,7 +14,7 @@ public class AnalyzedTripPersistenceProducer {
     private EntityManagerFactory emfTrip;
 
     @Produces
-    @Named(value = "analyzedRripEntityManager")
+    @Named(value = "analyzedTripEntityManager")
     @ApplicationScoped
     public EntityManager getTripEntityManager() {
         return emfTrip.createEntityManager();

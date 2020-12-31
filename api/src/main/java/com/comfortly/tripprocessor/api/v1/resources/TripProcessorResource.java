@@ -3,6 +3,7 @@ package com.comfortly.tripprocessor.api.v1.resources;
 import com.comfortly.tripprocessor.lib.analyzedtrip.AnalyzedTripData;
 import com.comfortly.tripprocessor.lib.answer.AnswerData;
 import com.comfortly.tripprocessor.lib.trip.TripData;
+import com.comfortly.tripprocessor.services.beans.AnalyzedTripDataBean;
 import com.comfortly.tripprocessor.services.beans.AnswerDataBean;
 import com.comfortly.tripprocessor.services.beans.TripDataBean;
 
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,13 +32,13 @@ public class TripProcessorResource {
     private AnswerDataBean answerDataBean;
 
     @Inject
-    private AnalyzedTripData analyzedTripDataBean;
+    private AnalyzedTripDataBean analyzedTripDataBean;
 
     @Context
     protected UriInfo uriInfo;
 
     @Path("/{tripDataId}")
-    public void createTripData(@HeaderParam("UserId") String userId, @PathParam("tripDataId") Integer tripDataId) {
+    public Response createTripData(@HeaderParam("UserId") String userId, @PathParam("tripDataId") Integer tripDataId) {
 
         if (userId == null) {
             log.info("Missing UserId header");
@@ -47,6 +49,8 @@ public class TripProcessorResource {
         TripData tripData = tripDataBean.getTripData(tripDataId);
         List<AnswerData> answers = answerDataBean.getAnswersData(userId, tripDataId);
 
-        // TODO convert to AnalyzedTripData
+        // TODO the analyzed trip in between here
+
+        return Response.status(Response.Status.OK).build();
     }
 }

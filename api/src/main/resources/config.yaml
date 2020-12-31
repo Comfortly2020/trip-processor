@@ -14,12 +14,12 @@ kumuluzee:
       password: postgres
       max-pool-size: 20
     - jndi-name: jdbc/AnswerDataDS
-      connection-url: jdbc:postgresql://0.0.0.0:5432/answer-data
+      connection-url: jdbc:postgresql://0.0.0.0:5434/answer-data
       username: dbuser
       password: postgres
       max-pool-size: 20
     - jndi-name: jdbc/AnalyzedTripDataDS
-      connection-url: jdbc:postgresql://0.0.0.0:5432/analyzed-trip-data
+      connection-url: jdbc:postgresql://0.0.0.0:5435/analyzed-trip-data
       username: dbuser
       password: postgres
       max-pool-size: 20
