@@ -28,6 +28,7 @@
         <kumuluzee-health.version>2.3.1</kumuluzee-health.version>
         <kumuluzee-config-mp.version>1.4.0</kumuluzee-config-mp.version>
         <kumuluzee-metrics.version>2.3.0</kumuluzee-metrics.version>
+        <kumuluzee-rest-client.version>1.4.1.2</kumuluzee-rest-client.version>
 
         <postgresql.version>42.2.17</postgresql.version>
     </properties>
@@ -95,6 +96,17 @@
                 <groupId>com.comfortly</groupId>
                 <artifactId>trip-processor-lib</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.rest-client</groupId>
+                <artifactId>kumuluzee-rest-client</artifactId>
+                <version>${kumuluzee-rest-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.6</version>
             </dependency>
 
             <dependency>

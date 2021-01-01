@@ -17,6 +17,12 @@
             <artifactId>kumuluzee-jax-rs-jersey</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+
     </dependencies>
 
 

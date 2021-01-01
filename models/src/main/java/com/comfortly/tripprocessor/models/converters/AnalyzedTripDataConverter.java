@@ -13,6 +13,7 @@ public class AnalyzedTripDataConverter {
         AnalyzedTripData dto = new AnalyzedTripData();
         dto.setId(entity.getId());
         dto.setUserId(entity.getUserId());
+        dto.setTripId(entity.getTripId());
         dto.setStartLocationName(entity.getStartLocationName());
         dto.setStartLocationLat(entity.getStartLocationLat());
         dto.setStartLocationLng(entity.getStartLocationLng());
@@ -44,6 +45,7 @@ public class AnalyzedTripDataConverter {
 
         AnalyzedTripDataEntity entity = new AnalyzedTripDataEntity();
         entity.setUserId(dto.getUserId());
+        entity.setTripId(dto.getTripId());
         entity.setStartLocationName(dto.getStartLocationName());
         entity.setStartLocationLat(dto.getStartLocationLat());
         entity.setStartLocationLng(dto.getStartLocationLng());

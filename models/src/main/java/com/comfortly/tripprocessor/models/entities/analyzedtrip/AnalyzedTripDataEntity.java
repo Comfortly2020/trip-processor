@@ -20,6 +20,9 @@ public class AnalyzedTripDataEntity {
     @Column(name = "user_id")
     private String userId;
 
+    @Column(name = "trip_id")
+    private Integer tripId;
+
     @Column(name = "start_location_name")
     private String startLocationName;
 
@@ -83,6 +86,14 @@ public class AnalyzedTripDataEntity {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
     }
 
     public String getStartLocationName() {

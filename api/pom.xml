@@ -21,6 +21,11 @@
             <artifactId>kumuluzee-servlet-jetty</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <artifactId>kumuluzee-config-consul</artifactId>-->
 <!--            <groupId>com.kumuluz.ee.config</groupId>-->

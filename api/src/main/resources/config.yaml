@@ -18,11 +18,11 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
-    - jndi-name: jdbc/AnalyzedTripDataDS
+    - jndi-name: jdbc/AnalyzedtripDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5435/analyzed-trip-data
       username: dbuser
       password: postgres
-      max-pool-size: 20
+      max-pool-size: 50
   config:
     consul:
       agent: http://localhost:8500
@@ -36,11 +36,23 @@ kumuluzee:
         jndi-name: jdbc/AnswerDataDS
       - data-source-health-check:
         type: liveness
-        jndi-name: jdbc/AnalyzedTripDataDS
+        jndi-name: jdbc/AnalyzedtripDataDS
   metrics:
     web-instrumentation:
       - name: processor-endpoint
         url-pattern: /v1/process
+  rest-client:
+    registrations:
+      - class: snap-to-roads-api
+        url: https://roads.googleapis.com/v1/snapToRoads
+        connect-timeout: 5000
+        read-timeout: 5000
+      - class: reverse-geocoding-api
+        url: https://maps.googleapis.com/maps/api/geocode/json
+        connect-timeout: 5000
+        read-timeout: 5000
 rest-properties:
   config:
     broken: false
+app-properties:
+  google-api-key: API_KEY_GOES_HERE
