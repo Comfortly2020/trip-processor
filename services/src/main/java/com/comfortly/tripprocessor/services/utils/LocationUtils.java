@@ -1,4 +1,4 @@
-package com.comfortly.tripprocessor.api.utils;
+package com.comfortly.tripprocessor.services.utils;
 
 public class LocationUtils {
 

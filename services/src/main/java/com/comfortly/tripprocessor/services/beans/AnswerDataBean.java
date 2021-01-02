@@ -4,6 +4,7 @@ import com.comfortly.tripprocessor.lib.answer.AnswerData;
 import com.comfortly.tripprocessor.models.converters.AnswerDataConverter;
 import com.comfortly.tripprocessor.models.entities.answer.AnswerDataEntity;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@RequestScoped
+@ApplicationScoped
 public class AnswerDataBean {
 
     private Logger log = Logger.getLogger(AnswerDataBean.class.getName());

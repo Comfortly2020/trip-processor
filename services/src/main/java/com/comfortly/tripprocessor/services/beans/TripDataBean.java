@@ -4,6 +4,7 @@ import com.comfortly.tripprocessor.lib.trip.TripData;
 import com.comfortly.tripprocessor.models.converters.TripDataConverter;
 import com.comfortly.tripprocessor.models.entities.trip.TripDataEntity;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,8 +12,7 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.NotFoundException;
 import java.util.logging.Logger;
 
-
-@RequestScoped
+@ApplicationScoped
 public class TripDataBean {
 
     private Logger log = Logger.getLogger(TripDataBean.class.getName());

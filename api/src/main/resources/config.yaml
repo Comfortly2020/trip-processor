@@ -12,17 +12,17 @@ kumuluzee:
       connection-url: jdbc:postgresql://0.0.0.0:5432/trip-data
       username: dbuser
       password: postgres
-      max-pool-size: 20
+      max-pool-size: 2
     - jndi-name: jdbc/AnswerDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5434/answer-data
       username: dbuser
       password: postgres
-      max-pool-size: 20
+      max-pool-size: 2
     - jndi-name: jdbc/AnalyzedtripDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5435/analyzed-trip-data
       username: dbuser
       password: postgres
-      max-pool-size: 50
+      max-pool-size: 2
   config:
     consul:
       agent: http://localhost:8500
@@ -51,8 +51,23 @@ kumuluzee:
         url: https://maps.googleapis.com/maps/api/geocode/json
         connect-timeout: 5000
         read-timeout: 5000
+  streaming:
+    kafka:
+      consumer:
+        bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094
+        group-id: group1
+        enable-auto-commit: true
+        auto-commit-interval-ms: 1000
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        security-protocol: SASL_SSL
+        sasl-mechanism: SCRAM-SHA-256
+        sasl-jaas-config:
 rest-properties:
   config:
     broken: false
 app-properties:
   google-api-key: API_KEY_GOES_HERE
+streaming-properties:
+  processing-topic: hus39ssl-trips_processing

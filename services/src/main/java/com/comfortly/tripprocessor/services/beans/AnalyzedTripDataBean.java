@@ -4,14 +4,14 @@ import com.comfortly.tripprocessor.lib.analyzedtrip.AnalyzedTripData;
 import com.comfortly.tripprocessor.models.converters.AnalyzedTripDataConverter;
 import com.comfortly.tripprocessor.models.entities.analyzedtrip.AnalyzedTripDataEntity;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import java.util.logging.Logger;
 
-
-@RequestScoped
+@ApplicationScoped
 public class AnalyzedTripDataBean {
 
     private Logger log = Logger.getLogger(AnalyzedTripDataBean.class.getName());
