@@ -5,7 +5,6 @@ import com.comfortly.tripprocessor.models.converters.AnswerDataConverter;
 import com.comfortly.tripprocessor.models.entities.answer.AnswerDataEntity;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
