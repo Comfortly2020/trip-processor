@@ -67,6 +67,7 @@ kumuluzee:
 rest-properties:
   config:
     broken: false
+    score-multiplier: 10
 app-properties:
   google-api-key: API_KEY_GOES_HERE
 streaming-properties:

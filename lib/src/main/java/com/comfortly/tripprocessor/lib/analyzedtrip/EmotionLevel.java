@@ -4,8 +4,8 @@ public enum EmotionLevel {
     HAPPY("HAPPY"),
     CALM("CALM"),
     STRESSED("STRESSED"),
-    ANGRY("ANGRY"),
     SAD("SAD"),
+    ANGRY("ANGRY"),
     FRIGHTENED("FRIGHTENED"),
     UNKNOWN("UNKNOWN");
 

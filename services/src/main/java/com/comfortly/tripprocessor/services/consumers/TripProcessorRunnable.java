@@ -27,14 +27,15 @@ public class TripProcessorRunnable implements Runnable {
 
     private static final Logger log = Logger.getLogger(TripProcessorRunnable.class.getName());
 
-    private Integer tripId;
-    private String userId;
-    private TripDataBean tripDataBean;
-    private AnswerDataBean answerDataBean;
-    private AnalyzedTripDataBean analyzedTripDataBean;
-    private String googleApiKey;
-    private SnapToRoadClient snapToRoadClient;
-    private ReverseGeocodingClient reverseGeocodingClient;
+    private final Integer tripId;
+    private final String userId;
+    private final TripDataBean tripDataBean;
+    private final AnswerDataBean answerDataBean;
+    private final AnalyzedTripDataBean analyzedTripDataBean;
+    private final String googleApiKey;
+    private final Integer scoreMultiplier;
+    private final SnapToRoadClient snapToRoadClient;
+    private final ReverseGeocodingClient reverseGeocodingClient;
 
     public TripProcessorRunnable(
             Integer tripId,
@@ -43,6 +44,7 @@ public class TripProcessorRunnable implements Runnable {
             AnswerDataBean answerDataBean,
             AnalyzedTripDataBean analyzedTripDataBean,
             String googleApiKey,
+            Integer scoreMultiplier,
             SnapToRoadClient snapToRoadClient,
             ReverseGeocodingClient reverseGeocodingClient
     ) {
@@ -52,6 +54,7 @@ public class TripProcessorRunnable implements Runnable {
         this.answerDataBean = answerDataBean;
         this.analyzedTripDataBean = analyzedTripDataBean;
         this.googleApiKey = googleApiKey;
+        this.scoreMultiplier = scoreMultiplier;
         this.snapToRoadClient = snapToRoadClient;
         this.reverseGeocodingClient = reverseGeocodingClient;
     }
@@ -66,6 +69,10 @@ public class TripProcessorRunnable implements Runnable {
 
         TripData tripData = tripDataBean.getTripData(tripId);
         List<AnswerData> answers = answerDataBean.getAnswersData(userId, tripId);
+        if (answers == null || answers.isEmpty()) {
+            log.severe("Tried to fetch answers for trip with id: " + tripId + " and userId: " + userId + " but it was null or empty");
+            return;
+        }
 
         Double averageSpeedSum = 0.0;
         Double averageAccelerationSum = 0.0;
@@ -150,11 +157,23 @@ public class TripProcessorRunnable implements Runnable {
             log.severe(e.getMessage());
         }
 
-        Double comfortLevel = (1 / (averageAcceleration + 0.0001) + 1 / (averageSpeed + 0.0001)) * 10;
+        Double comfortLevel = (1 / (averageAcceleration + 0.0001) + 1 / (averageSpeed + 0.0001)) * scoreMultiplier;
 
-        // TODO change this
-        EmotionLevel emotions = EmotionLevel.HAPPY;
+        EmotionLevel emotions = EmotionLevel.UNKNOWN;
+        try {
+            int emotionLevel = Integer.parseInt(answers.get(0).getAnswer());
 
+            switch (emotionLevel) {
+                case 1 -> emotions = EmotionLevel.HAPPY;
+                case 2 -> emotions = EmotionLevel.CALM;
+                case 3 -> emotions = EmotionLevel.STRESSED;
+                case 4 -> emotions = EmotionLevel.SAD;
+                case 5 -> emotions = EmotionLevel.ANGRY;
+                case 6 -> emotions = EmotionLevel.FRIGHTENED;
+            }
+        } catch (Exception e) {
+            log.severe("Invalid emotionLevel answer with the value: " + answers.get(0).getAnswer());
+        }
 
         analyzedTripData.setUserId(tripData.getUserId());
         analyzedTripData.setTripId(tripData.getId());

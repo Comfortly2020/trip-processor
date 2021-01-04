@@ -1,6 +1,7 @@
 package com.comfortly.tripprocessor.services.consumers;
 
 import com.comfortly.tripprocessor.config.AppProperties;
+import com.comfortly.tripprocessor.config.RestProperties;
 import com.comfortly.tripprocessor.config.StreamingProperties;
 import com.comfortly.tripprocessor.services.beans.AnalyzedTripDataBean;
 import com.comfortly.tripprocessor.services.beans.AnswerDataBean;
@@ -39,6 +40,9 @@ public class EventConsumer {
     private AppProperties appProperties;
 
     @Inject
+    private RestProperties restProperties;
+
+    @Inject
     @RestClient
     private SnapToRoadClient snapToRoadClient;
 
@@ -70,6 +74,7 @@ public class EventConsumer {
                 answerDataBean,
                 analyzedTripDataBean,
                 appProperties.getGoogleApiKey(),
+                restProperties.getScoreMultiplier(),
                 snapToRoadClient,
                 reverseGeocodingClient
         );
