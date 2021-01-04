@@ -25,7 +25,7 @@ kumuluzee:
       max-pool-size: 2
   config:
     consul:
-      agent: http://localhost:8500
+      agent: http://52.224.38.169:80
   health:
     checks:
       - data-source-health-check:
