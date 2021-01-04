@@ -26,17 +26,6 @@ kumuluzee:
   config:
     consul:
       agent: http://52.224.38.169:80
-  health:
-    checks:
-      - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/TripDataDS
-      - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/AnswerDataDS
-      - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/AnalyzedtripDataDS
   metrics:
     web-instrumentation:
       - name: processor-endpoint
