@@ -13,21 +13,18 @@ kumuluzee:
       username: dbuser
       password: postgres
       pool:
-        min-size: 2
         max-size: 5
     - jndi-name: jdbc/AnswerDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5434/answer-data
       username: dbuser
       password: postgres
       pool:
-        min-size: 2
         max-size: 5
     - jndi-name: jdbc/AnalyzedtripDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5435/analyzed-trip-data
       username: dbuser
       password: postgres
       pool:
-        min-size: 2
         max-size: 5
   config:
     consul:
@@ -69,7 +66,7 @@ kumuluzee:
         value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
         security-protocol: SASL_SSL
         sasl-mechanism: SCRAM-SHA-256
-        sasl-jaas-config:
+        sasl-jaas-config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="hus39ssl" password="h8UPiqVSJZzGlTpbXQ4Yl4vC2Y_Zi1Jo";'
 rest-properties:
   config:
     broken: false
