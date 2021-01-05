@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trip-processor-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trip-processor
+  template:
+    metadata:
+      labels:
+        app: trip-processor
+    spec:
+      containers:
+        - image: davidunilj/comfortly-trip-processor:2021-01-05-17-46-31
+          name: trip-processor
+          env:
+            - name: KUMULUZEE_CONFIG_CONSUL_AGENT
+              value: http://52.224.38.169:80
+#            - name: KUMULUZEE_STREAMING_KAFKA_CONSUMER_SASLJAASCONFIG
+#              valueFrom:
+#                secretKeyRef:
+#                  name: streaming-config
+#                  key: config
+            - name: APPPROPERTIES_GOOGLEAPIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: g-api-key
+                  key: apikey
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://ec2-3-216-181-219.compute-1.amazonaws.com:5432/d4hfbtpkj75g0k
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: udtyfzalkeuemc
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: trip-pg-pass
+                  key: password
+            - name: KUMULUZEE_DATASOURCES1_CONNECTIONURL
+              value: jdbc:postgresql://ec2-34-196-34-158.compute-1.amazonaws.com:5432/dd7j1603ca8v0l
+            - name: KUMULUZEE_DATASOURCES1_USERNAME
+              value: pmrytbzfwtwmlt
+            - name: KUMULUZEE_DATASOURCES1_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: answer-pg-pass
+                  key: password
+            - name: KUMULUZEE_DATASOURCES2_CONNECTIONURL
+              value: jdbc:postgresql://ec2-52-205-99-67.compute-1.amazonaws.com:5432/d188c2kjcccvrg
+            - name: KUMULUZEE_DATASOURCES2_USERNAME
+              value: wkgqrsmwmzdpqm
+            - name: KUMULUZEE_DATASOURCES2_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: analyzed-trip-pg-pass
+                  key: password
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: trip-processor
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: trip-processor
