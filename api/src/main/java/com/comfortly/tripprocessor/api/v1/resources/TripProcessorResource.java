@@ -65,9 +65,9 @@ public class TripProcessorResource {
 //    @RestClient
 //    private SnapToRoadClient snapToRoadClient;
 
-    @Inject
-    @RestClient
-    private ReverseGeocodingClient reverseGeocodingClient;
+//    @Inject
+//    @RestClient
+//    private ReverseGeocodingClient reverseGeocodingClient;
 
 //    @GET
 //    @Path("/{tripDataId}")

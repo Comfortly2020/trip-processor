@@ -12,17 +12,23 @@ kumuluzee:
       connection-url: jdbc:postgresql://0.0.0.0:5432/trip-data
       username: dbuser
       password: postgres
-      max-pool-size: 1
+      pool:
+        min-size: 2
+        max-size: 5
     - jndi-name: jdbc/AnswerDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5434/answer-data
       username: dbuser
       password: postgres
-      max-pool-size: 1
+      pool:
+        min-size: 2
+        max-size: 5
     - jndi-name: jdbc/AnalyzedtripDataDS
       connection-url: jdbc:postgresql://0.0.0.0:5435/analyzed-trip-data
       username: dbuser
       password: postgres
-      max-pool-size: 1
+      pool:
+        min-size: 2
+        max-size: 5
   config:
     consul:
       agent: http://52.224.38.169:80
