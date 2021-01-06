@@ -32,14 +32,18 @@ kumuluzee:
   health:
     checks:
       - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/TripDataDS
+          type: liveness
+          jndi-name: jdbc/TripDataDS
       - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/AnswerDataDS
+          type: liveness
+          jndi-name: jdbc/AnswerDataDS
       - data-source-health-check:
-        type: liveness
-        jndi-name: jdbc/AnalyzedtripDataDS
+          type: liveness
+          jndi-name: jdbc/AnalyzedtripDataDS
+      - kafka-health-check:
+          bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094
+          minimum-available-nodes: 1
+          request-timeout-ms: 1000
   metrics:
     web-instrumentation:
       - name: processor-endpoint
