@@ -44,6 +44,9 @@ kumuluzee:
           bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094
           minimum-available-nodes: 1
           request-timeout-ms: 1000
+      - http-health-check:
+          - connection-url: https://roads.googleapis.com/v1/snapToRoads
+          - connection-url: https://maps.googleapis.com/maps/api/geocode/json
   metrics:
     web-instrumentation:
       - name: processor-endpoint
