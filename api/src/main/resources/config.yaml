@@ -31,22 +31,17 @@ kumuluzee:
       agent: http://52.224.38.169:80
   health:
     checks:
-      - data-source-health-check:
-          type: liveness
-          jndi-name: jdbc/TripDataDS
-      - data-source-health-check:
-          type: liveness
-          jndi-name: jdbc/AnswerDataDS
-      - data-source-health-check:
-          type: liveness
-          jndi-name: jdbc/AnalyzedtripDataDS
-      - kafka-health-check:
-          bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094
-          minimum-available-nodes: 1
-          request-timeout-ms: 1000
-      - http-health-check:
-          - connection-url: https://roads.googleapis.com/v1/snapToRoads
-          - connection-url: https://maps.googleapis.com/maps/api/geocode/json
+      data-source-health-check:
+        - jndi-name: jdbc/TripDataDS
+        - jndi-name: jdbc/AnswerDataDS
+        - jndi-name: jdbc/AnalyzedtripDataDS
+      kafka-health-check:
+        bootstrap-servers: rocket-01.srvs.cloudkafka.com:9094
+        minimum-available-nodes: 1
+        request-timeout-ms: 1000
+      http-health-check:
+        - connection-url: https://roads.googleapis.com/v1/snapToRoads
+        - connection-url: https://maps.googleapis.com/maps/api/geocode/json
   metrics:
     web-instrumentation:
       - name: processor-endpoint
