@@ -16,7 +16,7 @@ jobs:
     
     - name: Write secrets to file
       run: |
-        echo $TEST_ENV_FILE >> lib/aaa.properties
+        echo "$TEST_ENV_FILE" >> lib/aaa.properties
         cat lib/aaa.properties
       shell: bash
       env:
