@@ -13,14 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Write secrets to file
-      run: |
-        echo "$TEST_ENV_FILE" >> lib/aaa.properties
-        cat lib/aaa.properties
-      shell: bash
-      env:
-        TEST_ENV_FILE: ${{secrets.DELETE_ME}}
    
     - name: Get Time
       id: time
